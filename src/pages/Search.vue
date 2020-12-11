@@ -3,6 +3,7 @@
     <ais-instant-search
       :search-client="searchClient"
       index-name="instant_search"
+      :routing="routing"
     >
       <div class="search-panel">
         <div class="search-panel__filters">
@@ -29,6 +30,8 @@
 import Vue from 'vue'
 import InstantSearch from 'vue-instantsearch'
 import algoliasearch from 'algoliasearch/lite'
+import { history as historyRouter } from 'instantsearch.js/es/lib/routers'
+import { simple as simpleStateMapping } from 'instantsearch.js/es/lib/stateMappings'
 import 'instantsearch.css/themes/satellite-min.css'
 
 Vue.use(InstantSearch)
@@ -40,7 +43,11 @@ export default {
       searchClient: algoliasearch(
         'latency',
         '6be0576ff61c053d5f9a3225e2a90f76'
-      )
+      ),
+      routing: {
+        router: historyRouter(),
+        stateMapping: simpleStateMapping()
+      }
     }
   }
 }
